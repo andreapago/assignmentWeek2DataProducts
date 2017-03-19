@@ -1,0 +1,30 @@
+---
+title: "Peer-graded Assignment: R Markdown and Leaflet"
+author: "G.A. Pagani"
+date: "March 19, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Assignment week 2 for course Developing Data Products -- Coursera
+###Purpose: Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet.
+
+```{r loadLibs, echo=TRUE, warning=FALSE}
+library(leaflet)
+```
+
+
+```{r loadData}
+df<-read.csv("~/Documents/coursera/Course9-Developing-Data-Products/week2/miscanthusyield.csv")
+```
+
+The map just shows the data of "Modeling spatial and dynamic variation in growth, yield, and yield stability of the bioenergy crops Miscanthus × giganteus and Panicum virgatum across the conterminous United States" by Miguez, F. E., Maughan, M., Bollero, G. A. and Long, S. P. (2012) [http://onlinelibrary.wiley.com/doi/10.1111/j.1757-1707.2011.01150.x/full] using a leaflet map with clustering and (once zoom-in) the circles whose radius is proportional to the yeld in the surrounding area.
+
+```{r pressure, echo=FALSE}
+df %>% leaflet() %>% addTiles() %>% addCircleMarkers( radius = df$yield, clusterOption = markerClusterOptions())
+```
+
+
